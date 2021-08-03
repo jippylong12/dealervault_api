@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dealervault_api (0.1.0)
+    dealervault_api (0.1.1)
       faraday (~> 1.6)
       faraday_middleware (~> 1.1)
 
