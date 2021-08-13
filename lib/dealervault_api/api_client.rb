@@ -17,7 +17,10 @@ module DealervaultApi
     end
 
     def call_api(http_method, path, opts = {})
-      headers = {'Content-Type' => "application/json", 'X-User': @user, 'Ocp-Apim-Subscription-Key': @subscription_key}
+      headers = {'X-User' => @user, 'Content-Type' => "application/json", 'Ocp-Apim-Subscription-Key': @subscription_key}
+      if opts[:headers]
+        headers.merge!(opts[:headers])
+      end
 
       conn = Faraday.new(
         url: @host,

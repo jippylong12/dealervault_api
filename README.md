@@ -12,21 +12,23 @@ gem 'dealervault_api'
 
 And then execute:
 
-    $ bundle install
+```shell
+$ bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install dealervault_api
+```shell
+$ gem install dealervault_api
+```
 
 ## Usage
 
 Initialize client
     
-    client = DealervaultApi::Client.new('USER_EMAIL_HERE', 'API_KEY_HERE')
-
-GET JWT TOKEN
-    
-    response = client.delivery.get_jwt_token
+```ruby
+client = DealervaultApi::Client.new('USER_EMAIL_HERE', 'API_KEY_HERE')
+```
 
 ## Development
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
