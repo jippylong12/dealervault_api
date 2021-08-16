@@ -27,8 +27,22 @@ $ gem install dealervault_api
 Initialize client
     
 ```ruby
-client = DealervaultApi::Client.new('USER_EMAIL_HERE', 'API_KEY_HERE')
+client = DealervaultApi::Client.new('USER_EMAIL_HERE', 'API_KEY_HERE') # the token will be retrieved
 ```
+
+Create a delivery request and retrieve id
+```ruby
+data = @client.delivery.create('PROGRAM_ID_DVV12345', 'ROOFTOP_ID_DVD12345', 'FILE_TYPE', 'TYPE')
+data['requestId']
+```
+
+Check the data set
+
+```ruby 
+data = @client.delivery.data_set('REQUEST_ID', 500)
+```
+
+
 
 ## Development
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
