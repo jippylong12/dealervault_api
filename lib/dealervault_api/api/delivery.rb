@@ -3,12 +3,19 @@ module DealervaultApi
     attr_accessor :api_client
 
     VALID_PARAMETERS = {
-      feeds: [:fileTypeCode, :compareDate]
+      feeds: [:fileTypeCode, :compareDate],
+      create: [:type, :historicalMonths, :catchupStartDate, :catchupEndDate]
     }
 
     VALID_VALUES = {
       feeds: {
         fileTypeCode: %w[SL]
+      },
+      create: {
+        type: %w[Sample Daily Historical Catchup],
+        historicalMonths: true,
+        catchupStartDate: true,
+        catchupEndDate: true
       }
     }
 
@@ -42,7 +49,29 @@ module DealervaultApi
       @api_client.call_api(:GET, local_var_path, headers: {'X-Jwt-Token' => @jwt}, query_params: params)
     end
 
+    # GET - Retrieves a paged data set.
+    def data_set(request_id, page_size, params={})
+      local_var_path = "delivery"
+      params.merge!({requestId: request_id, pageSize: page_size})
+      @api_client.call_api(:GET, local_var_path, headers: {'X-Jwt-Token' => @jwt}, query_params: params)
+    end
 
+    # POST - Initiate a dealer delivery
+    def create(program_id, rooftop_id, file_type, delivery_type, options={})
+      local_var_path = "delivery"
+      options.merge!({type: delivery_type})
+      options = whitelist_params(options, VALID_PARAMETERS, :create)
+
+      body = {
+        programId: program_id,
+        rooftopId: rooftop_id,
+        fileType: file_type,
+        options: options
+      }
+
+      body = @api_client.call_api(:POST, local_var_path, headers: {'X-Jwt-Token' => @jwt}, body: body)
+      body
+    end
 
 
 

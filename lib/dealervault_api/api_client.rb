@@ -32,7 +32,7 @@ module DealervaultApi
       res = nil
       case http_method.to_sym.downcase
       when :post, :put, :patch, :delete
-        res = conn.run_request(http_method.to_sym.downcase, path,  opts[:body], nil)
+        res = conn.run_request(http_method.to_sym.downcase, path,  opts[:body].to_json, nil)
       when :get
         res = conn.run_request(:get, path,  nil, nil)
 
